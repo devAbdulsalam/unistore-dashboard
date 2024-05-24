@@ -11,7 +11,6 @@ const AddProduct = lazy(() => import('../pages/AddProduct'));
 const EditProduct = lazy(() => import('../pages/EditProduct'));
 const Listings = lazy(() => import('../pages/Orders'));
 const Listing = lazy(() => import('../pages/Order'));
-const FormElements = lazy(() => import('../pages/Form/FormElements'));
 
 const coreRoutes = [
   {
@@ -83,11 +82,6 @@ const coreRoutes = [
     path: '/notifications',
     title: 'Notifications',
     component: Notifications,
-  },
-  {
-    path: '/forms',
-    title: 'forms',
-    component: FormElements,
   },
 ];
 
