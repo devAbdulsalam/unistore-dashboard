@@ -23,7 +23,6 @@ const Products = () => {
     queryFn: () => fetchProducts(info),
   });
   const navigate = useNavigate();
-
   const queryClient = useQueryClient();
   useEffect(() => {
     if (data) {
