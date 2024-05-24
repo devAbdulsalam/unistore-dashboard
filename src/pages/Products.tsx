@@ -77,6 +77,7 @@ const Products = () => {
           product_id: id,
           quantity,
           total: Number(product.price * quantity),
+          status: 'PENDING',
         };
 
         console.log('order', order);

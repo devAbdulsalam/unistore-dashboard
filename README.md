@@ -168,6 +168,4 @@ This project is licensed under the MIT License. See the LICENSE file for details
 
 ### Contact
 
-For any questions or issues, please contact us at [contact@example.com](mailto:contact@example.com).
-
-[![tailwind react admin template](https://ucarecdn.com/d2a6daed-eb9c-4c2f-8a95-4419c450e23a/tailadminreact.jpg)](https://react-demo.tailadmin.com/)
+For any questions or issues, please contact us at [ammuftau74@gmail.com](mailto:ammuftau74@gmail.com).
