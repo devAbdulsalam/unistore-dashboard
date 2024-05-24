@@ -26,21 +26,26 @@ const EditProduct = () => {
   });
   const navigate = useNavigate();
   const queryClient = useQueryClient();
+  const [name, setName] = useState<string>(data?.name || '');
+  const [description, setDescription] = useState<string>(data?.description);
+  const [price, setPrice] = useState<string>(data?.price);
+  const [quantity, setQuantity] = useState<string>(data?.quantity);
+  const [category, setCategory] = useState<string>(data?.category);
   useEffect(() => {
     if (data) {
       console.log(data);
-      navigate(`/products/${id}/edit-product`);
+      setName(data.name);
+      setDescription(data.description);
+      setPrice(data.price);
+      setQuantity(data.quantity);
+      setCategory(data.category);
+      // navigate(`/products/${id}/edit-product`);
     }
     if (error || isError) {
       const message = getError(error);
       console.log(message);
     }
   }, [data, error, isError]);
-  const [name, setName] = useState<string>(data?.name || '');
-  const [description, setDescription] = useState<string>(data?.description);
-  const [price, setPrice] = useState<string>(data?.price);
-  const [quantity, setQuantity] = useState<string>(data?.quantity);
-  const [category, setCategory] = useState<string>(data?.claimed);
   const handleCategoryChange = (
     event: React.ChangeEvent<HTMLSelectElement>,
   ) => {
@@ -95,7 +100,7 @@ const EditProduct = () => {
     <>
       <Breadcrumb
         parent="Product"
-        link={`product/${id}`}
+        link={`products/${id}`}
         pageName="Edit Product"
       />
 
