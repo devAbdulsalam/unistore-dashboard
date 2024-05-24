@@ -94,7 +94,7 @@ const Products = () => {
           .then((data) => {
             // console.log('order data', data);
             queryClient.invalidateQueries({ queryKey: ['products', id] });
-            return Swal.fire('Not enough product quantity available');
+            return Swal.fire('Order successfully');
           })
           .catch((error) => {
             console.error(error);
