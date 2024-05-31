@@ -36,12 +36,12 @@ const Table = ({ data, header, handleEdit, handleDelete }) => {
                       <span className="actions flex grid-cols-2 gap-4">
                         <BsFillTrashFill
                           className="delete-btn cursor-pointer"
-                          onClick={() => handleDelete(row._id)}
+                          onClick={() => handleDelete(row.id)}
                         />
 
                         <BsFillPencilFill
                           className="edit-btn cursor-pointer"
-                          onClick={() => handleEdit(row._id)}
+                          onClick={() => handleEdit(row.id)}
                         />
                       </span>
                     </td>

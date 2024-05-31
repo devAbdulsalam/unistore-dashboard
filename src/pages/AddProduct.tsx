@@ -6,9 +6,10 @@ import toast from 'react-hot-toast';
 import axios from 'axios';
 import getError from '../hooks/getError.js';
 import AuthContext from '../context/authContext.jsx';
-import { categoriesData } from '../data.js';
+import { fetchCategories } from '../hooks/axiosApis.js';
+// import { categoriesData } from '../data.js';
 const apiUrl = import.meta.env.VITE_API_URL;
-import { useQueryClient } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 
 interface FormData {
   [key: string]: string | Blob;
@@ -27,6 +28,10 @@ const AddProduct = () => {
   const isValidFileType = (file: File): boolean => {
     return validTypes.includes(file.type);
   };
+  const { isLoading: categoryLoading, data: categoriesData } = useQuery({
+    queryKey: ['category'],
+    queryFn: () => fetchCategories(user),
+  });
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = event.target.files && event.target.files[0];
@@ -74,19 +79,22 @@ const AddProduct = () => {
     if (!quantity > 0) {
       return toast.error('Product quantity is required!');
     }
-    // if (!file) {
-    //   return toast.error('Product image is required!');
-    // }
     if (!category) {
       return toast.error('Product category is required!');
+    }
+    console.log('product data', category);
+
+    if (!file) {
+      return toast.error('Product image is required!');
     }
     const data: FormData = {
       name,
       price,
       quantity,
-      category,
+      category_id: category,
       description,
     };
+
     setLoading(true);
     const formData = new FormData();
     for (const key in data) {
@@ -202,7 +210,7 @@ const AddProduct = () => {
                       <option value="">Category</option>
                       {categoriesData.map((item, index) => {
                         return (
-                          <option key={index} value={item.name}>
+                          <option key={index} value={item.id}>
                             {item.name}
                           </option>
                         );
@@ -250,7 +258,7 @@ const AddProduct = () => {
           Add Product
         </button>
       </div>
-      {loading ? <Loader /> : ''}
+      {loading || categoryLoading ? <Loader /> : ''}
     </>
   );
 };

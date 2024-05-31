@@ -5,9 +5,9 @@ import { useNavigate, useParams } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import axios from 'axios';
 import getError from '../hooks/getError.js';
-import { fetchProduct } from '../hooks/axiosApis.js';
+import { fetchProduct, fetchCategories } from '../hooks/axiosApis.js';
 import AuthContext from '../context/authContext.jsx';
-import { categoriesData } from '../data.js';
+// import { categoriesData } from '../data.js';
 const apiUrl = import.meta.env.VITE_API_URL;
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 
@@ -24,6 +24,10 @@ const EditProduct = () => {
     queryKey: ['products', id],
     queryFn: () => fetchProduct(info),
   });
+  const { isLoading: categoryLoading, data: categoriesData } = useQuery({
+    queryKey: ['category'],
+    queryFn: () => fetchCategories(user),
+  });
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const [name, setName] = useState<string>(data?.name || '');
@@ -38,7 +42,7 @@ const EditProduct = () => {
       setDescription(data.description);
       setPrice(data.price);
       setQuantity(data.quantity);
-      setCategory(data.category);
+      // setCategory(data.category);
       // navigate(`/products/${id}/edit-product`);
     }
     if (error || isError) {
@@ -69,11 +73,21 @@ const EditProduct = () => {
     if (!description) {
       return toast.error('Product description is required!');
     }
+    if (!price) {
+      return toast.error('Product price is required!');
+    }
+    console.log('category, evlent.target.value', category);
+    if (!category) {
+      return toast.error('Product Category is required!');
+    }
+    if (!quantity) {
+      return toast.error('Product price is required!');
+    }
     const data: FormData = {
       name,
       price,
       quantity,
-      category,
+      category_id: category,
       description,
     };
     setLoading(true);
@@ -187,8 +201,8 @@ const EditProduct = () => {
                       onChange={handleCategoryChange}
                       className="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-5 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                     >
-                      {categoriesData.map((item, index) => (
-                        <option key={index} value={item.name}>
+                      {categoriesData?.map((item, index) => (
+                        <option key={index} value={item.id}>
                           {item.name}
                         </option>
                       ))}
@@ -225,7 +239,7 @@ const EditProduct = () => {
           Update Product
         </button>
       </div>
-      {loading || isLoading ? <Loader /> : ''}
+      {loading || isLoading || categoryLoading ? <Loader /> : ''}
     </>
   );
 };

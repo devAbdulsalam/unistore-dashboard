@@ -127,6 +127,33 @@ export const fetchOrders = async (prop) => {
     return error;
   }
 };
+export const fetchCategory = async (prop) => {
+  try {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${prop?.token}`,
+      },
+    };
+    const { data } = await axios.get(`${apiUrl}/categories/${prop.id}`, config);
+    return data;
+  } catch (error) {
+    return error;
+  }
+};
+export const fetchCategories = async (prop) => {
+  try {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${prop?.token}`,
+      },
+    };
+    const { data } = await axios.get(`${apiUrl}/categories`, config);
+    console.log("categoryLoading", data);
+    return data;
+  } catch (error) {
+    return error;
+  }
+};
 export const fetchOrder = async (prop) => {
   try {
     const config = {
