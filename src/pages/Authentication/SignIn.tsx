@@ -2,6 +2,7 @@ import { useState, useEffect, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 // import LogoDark from '../../images/logo/logo-dark.svg';
 import Logo from '../../images/logo/logo.png';
+import logo2 from '../../images/logo/logo-dark.png';
 import toast from 'react-hot-toast';
 import axios from 'axios';
 import Loader from '../../components/Loader';
@@ -68,7 +69,7 @@ const SignIn = () => {
             <div className="py-17.5 px-26 text-center">
               <Link className="mb-5.5 inline-block" to="/">
                 <img className="hidden dark:block" src={Logo} alt="Logo" />
-                <img className="dark:hidden" src={Logo} alt="Logo" />
+                <img className="dark:hidden" src={logo2} alt="Logo" />
               </Link>
 
               <p className="2xl:px-20">Welcome back</p>
@@ -201,7 +202,7 @@ const SignIn = () => {
             <div className="w-full p-4 sm:p-12.5 xl:p-17.5">
               {/* <span className="mb-1.5 block font-medium">Start for free</span> */}
               <h2 className="mb-9 text-2xl font-bold text-black dark:text-white sm:text-title-xl2">
-                Sign into Estore
+                Sign into Ustore
               </h2>
 
               <div>
