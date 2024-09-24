@@ -321,12 +321,12 @@ const SignIn = () => {
                 </button>
 
                 <div className="mt-6 text-center">
-                  <p>
+                  {/* <p>
                     Don’t have any account?{' '}
                     <Link to="/auth/signup" className="text-primary">
                       Sign Up
                     </Link>
-                  </p>
+                  </p> */}
                 </div>
               </div>
             </div>

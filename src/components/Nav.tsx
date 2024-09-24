@@ -31,11 +31,7 @@ const Nav = () => {
               <NavLink to="/auth/signin">Login</NavLink>
             </li>
           )}
-          {(pathname === '/' || !pathname.includes('signup')) && (
-            <li className="text-lg md:text-xl py-2 px-3 font-semibold rounded-md hover:bg-slate-300/10 text-white hover:text-primary-light transition duration-500 ease-in">
-              <NavLink to="/auth/signup">Signup </NavLink>
-            </li>
-          )}
+          
         </ul>
       </div>
     </nav>
