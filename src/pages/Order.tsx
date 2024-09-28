@@ -1,3 +1,5 @@
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useEffect, useState, useContext } from 'react';
 import Loader from '../components/Loader';
@@ -22,6 +24,35 @@ const Order = () => {
     queryKey: ['orders', id],
     queryFn: () => fetchOrder(info),
   });
+
+  const downloadPDF = (name: any) => {
+    const table = document.getElementById(name);
+
+    html2canvas(table).then((canvas) => {
+      const imgData = canvas.toDataURL('image/png');
+      const pdf = new jsPDF('p', 'pt', 'a4');
+      // const imgWidth = 300;
+      // const pageHeight = 290;
+      const pageWidth = pdf.internal.pageSize.getWidth();
+      const pageHeight = pdf.internal.pageSize.getHeight();
+      const imgWidth = pageWidth;
+      const imgHeight = (canvas.height * imgWidth) / canvas.width;
+      let heightLeft = imgHeight;
+      let position = 0;
+
+      pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+      heightLeft -= pageHeight;
+
+      while (heightLeft >= 0) {
+        position = heightLeft - imgHeight;
+        pdf.addPage();
+        pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+        heightLeft -= pageHeight;
+      }
+
+      pdf.save(`${name}-${id}.pdf`);
+    });
+  };
 
   useEffect(() => {
     if (data) {
@@ -63,7 +94,7 @@ const Order = () => {
       if (result.isConfirmed && result.value) {
         setLoading(true);
         axios
-          .patch(`${apiUrl}/orders/${id}`, {data: result.value}, config)
+          .patch(`${apiUrl}/orders/${id}`, { data: result.value }, config)
           .then((res) => {
             if (res.data) {
               console.log(res.data);
@@ -130,6 +161,9 @@ const Order = () => {
       }
     });
   };
+  const handlePrint = async () => {
+    await downloadPDF('receipt');
+  };
 
   return (
     <>
@@ -150,7 +184,7 @@ const Order = () => {
         <h3 className="font-semibold mb-2">Order info:</h3>
         <div>
           <p>Order Quantity: {data?.quantity}</p>
-          <p>Total Price: {data?.total}</p>
+          <p>User name: {data?.userName}</p>
           <h3 className="font-semibold my-2">Product info:</h3>
           <Link to={`/products/${data?.product_id}`}>
             Product Name: {data?.product?.name}
@@ -170,6 +204,12 @@ const Order = () => {
             </>
           )}
         </div>
+        <button
+          onClick={handlePrint}
+          className="flex w-full justify-center rounded bg-primary p-3 mt-3 font-medium text-gray"
+        >
+          Print
+        </button>
       </div>
       {isLoading || loading ? <Loader /> : ''}
     </>

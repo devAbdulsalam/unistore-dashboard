@@ -82,7 +82,7 @@ const Orders = () => {
       <Breadcrumb pageName="Orders" />
       <div className="flex flex-col gap-10">
         <Table
-          data={data}
+          data={data || []}
           user={user}
           header="Orders"
           handleDelete={handleDelete}

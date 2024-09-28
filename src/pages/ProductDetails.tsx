@@ -176,7 +176,7 @@ const Business = () => {
         <div>
           <p>Description: {data?.description}</p>
           <p>Quantity: {data?.quantity}</p>
-          <p>Status: {data?.status}</p>
+          <p>Date: {data?.createdAt}</p>
         </div>
       </div>
       {isLoading || loading ? <Loader /> : ''}

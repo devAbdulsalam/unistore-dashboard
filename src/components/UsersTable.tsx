@@ -32,7 +32,7 @@ const Table = ({ data, header, handleEdit, handleDelete }) => {
             </tr>
           </thead>
           <tbody>
-            {data?.map((row: any, idx: number) => {
+            {data?.length > 0 && data?.map((row: any, idx: number) => {
               return (
                 <tr key={idx} className="content-center">
                   <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark capitalize flex items-center gap-2">

@@ -8,7 +8,7 @@ export const fetchDashboard = async (user) => {
         Authorization: `Bearer ${user?.token || user?.accessToken}`,
       },
     };
-    const { data } = await axios.get(`${apiUrl}/reports/dashboard`, config);
+    const { data } = await axios.get(`${apiUrl}/users/user/dashboard`, config);
     return data;
   } catch (error) {
     console.log(error.message);
@@ -50,10 +50,7 @@ export const fetchUser = async (prop) => {
         Authorization: `Bearer ${prop?.token}`,
       },
     };
-    const { data } = await axios.get(
-      `${apiUrl}/users/${prop.id}`,
-      config,
-    );
+    const { data } = await axios.get(`${apiUrl}/users/${prop.id}`, config);
     return data;
   } catch (error) {
     console.log(error.message);
@@ -67,7 +64,7 @@ export const fetchProfile = async (prop) => {
         Authorization: `Bearer ${prop?.token || prop?.accessToken}`,
       },
     };
-    const { data } = await axios.get(`${apiUrl}/users/profile`, config);
+    const { data } = await axios.get(`${apiUrl}/users/user`, config);
     return data;
   } catch (error) {
     console.log(error.message);
@@ -95,8 +92,8 @@ export const fetchProducts = async (user) => {
         Authorization: `Bearer ${user?.token}`,
       },
     };
-    const { data } = await axios.get(`${apiUrl}/products`, config);
-    return data.products;
+    const { data } = await axios.get(`${apiUrl}/products/search`, config);
+    return data;
   } catch (error) {
     return error;
   }
@@ -134,7 +131,10 @@ export const fetchCategory = async (prop) => {
         Authorization: `Bearer ${prop?.token}`,
       },
     };
-    const { data } = await axios.get(`${apiUrl}/categories/${prop.id}`, config);
+    const { data } = await axios.get(
+      `${apiUrl}/products/categories/${prop.id}`,
+      config,
+    );
     return data;
   } catch (error) {
     return error;
@@ -147,8 +147,8 @@ export const fetchCategories = async (prop) => {
         Authorization: `Bearer ${prop?.token}`,
       },
     };
-    const { data } = await axios.get(`${apiUrl}/categories`, config);
-    console.log("categoryLoading", data);
+    const { data } = await axios.get(`${apiUrl}/products/categories`, config);
+    console.log('categoryLoading', data);
     return data;
   } catch (error) {
     return error;

@@ -167,7 +167,7 @@ const EditProduct = () => {
                 </h3>
               </div>
               <div className="flex flex-col gap-5.5 p-6.5">
-                <div className="">
+                {/* <div className="">
                   <label className="mb-2.5 block text-black dark:text-white">
                     Price
                   </label>
@@ -178,7 +178,7 @@ const EditProduct = () => {
                     placeholder="Enter Product title"
                     className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                   />
-                </div>
+                </div> */}
                 <div className="">
                   <label className="mb-2.5 block text-black dark:text-white">
                     Quantity
@@ -203,7 +203,7 @@ const EditProduct = () => {
                     >
                       {categoriesData?.map((item, index) => (
                         <option key={index} value={item.id}>
-                          {item.name}
+                          {item.name || item.category}
                         </option>
                       ))}
                     </select>

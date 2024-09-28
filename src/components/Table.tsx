@@ -1,6 +1,7 @@
 import { BsFillTrashFill, BsFillPencilFill } from 'react-icons/bs';
 import BrandOne from '../images/brand/brand-01.svg';
 import { Link } from 'react-router-dom';
+import moment from 'moment'
 const Table = ({ data, header, handleEdit, handleDelete, user }) => {
   return (
     <div className="rounded-sm border border-stroke bg-white px-5 pt-6 pb-2.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
@@ -21,6 +22,12 @@ const Table = ({ data, header, handleEdit, handleDelete, user }) => {
               )}
               <th className="py-4 px-4 font-medium text-black dark:text-white">
                 Quantity
+              </th>
+              <th className="py-4 px-4 font-medium text-black dark:text-white">
+                Collect Date
+              </th>
+              <th className="py-4 px-4 font-medium text-black dark:text-white">
+                Return Date
               </th>
               <th className="py-4 px-4 font-medium text-black dark:text-white">
                 Status
@@ -44,22 +51,30 @@ const Table = ({ data, header, handleEdit, handleDelete, user }) => {
                         className="w-[60px] h-[60px] rounded-full"
                       />
                     </Link>
-                    <Link to={`/orders/${row?.id}`}>{row?.product?.name}</Link>
+                    <Link to={`/orders/${row?.id}`}>
+                      {row?.product_id?.name}
+                    </Link>
                   </td>
                   {user?.user?.role === 'ADMIN' && (
                     <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
                       <Link
-                        to={`/users/${row?.user_id}`}
+                        to={`/users`}
                         className={`label label-${row?.user_id}`}
                       >
-                        {row?.user_id == user?.user?.id
-                          ? user?.user?.username
-                          : 'Admin'}
+                        {row?.user_id == user?.user?.id ? row?.name : 'Admin'}
                       </Link>
                     </td>
                   )}
                   <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
                     {row?.quantity}
+                  </td>
+                  <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
+                    {moment(row?.createdAt).format('MMM Do')}
+                  </td>
+                  <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
+                    {row.status === 'pending'
+                      ? moment(row?.createdAt).format('MMM Do')
+                      : ''}
                   </td>
                   <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
                     <span>{row.status || 'Approved'}</span>
@@ -69,12 +84,12 @@ const Table = ({ data, header, handleEdit, handleDelete, user }) => {
                       <span className="actions flex grid-cols-2 gap-4">
                         <BsFillTrashFill
                           className="delete-btn cursor-pointer"
-                          onClick={() => handleDelete(row?.id)}
+                          onClick={() => handleDelete(row?._id)}
                         />
 
                         <BsFillPencilFill
                           className="edit-btn cursor-pointer"
-                          onClick={() => handleEdit(row?.id)}
+                          onClick={() => handleEdit(row?._id)}
                         />
                       </span>
                     </td>

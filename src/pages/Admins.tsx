@@ -54,7 +54,7 @@ const Users = () => {
           .then((res) => {
             if (res.data) {
               console.log(res.data);
-              queryClient.invalidateQueries(['admins', 'users']);
+              queryClient.invalidateQueries({ queryKey: ['admins', 'users'] });
               Swal.fire({
                 title: 'User deleted',
                 icon: 'success',

@@ -6,6 +6,7 @@ import AuthContext from '../context/authContext';
 const Table = ({ data, header, handleEdit, handleDelete, handleCart }) => {
   const { user } = useContext(AuthContext);
   const [query, setQuery] = useState('');
+  console.log('data t', data);
   const filteredData = useMemo(() => {
     return data?.filter((data: any) => {
       // Filter by query (search)
@@ -78,7 +79,7 @@ const Table = ({ data, header, handleEdit, handleDelete, handleCart }) => {
             </tr>
           </thead>
           <tbody>
-            {filteredData?.map((row: any, idx: number) => {
+            { filteredData?.map((row: any, idx: number) => {
               return (
                 <tr key={idx} className="content-center">
                   <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark capitalize flex items-center gap-2">
@@ -89,7 +90,7 @@ const Table = ({ data, header, handleEdit, handleDelete, handleCart }) => {
                         className="w-[60px] h-[60px] rounded-full"
                       />
                     </div>
-                    <Link to={`/products/${row?.id}`}>{row?.name}</Link>
+                    <Link to={`/products/${row?._id}`}>{row?.name}</Link>
                   </td>
                   <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
                     {row.quantity < 0 ? (
@@ -116,20 +117,24 @@ const Table = ({ data, header, handleEdit, handleDelete, handleCart }) => {
                   <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
                     {user?.user?.role === 'ADMIN' ? (
                       <span className="actions flex grid-cols-2 gap-4">
+                        <BsCart
+                          className="edit-btn cursor-pointer"
+                          onClick={() => handleCart(row)}
+                        />
                         <BsFillTrashFill
                           className="delete-btn cursor-pointer"
-                          onClick={() => handleDelete(row.id)}
+                          onClick={() => handleDelete(row._id)}
                         />
 
                         <BsFillPencilFill
                           className="edit-btn cursor-pointer"
-                          onClick={() => handleEdit(row.id)}
+                          onClick={() => handleEdit(row._id)}
                         />
                       </span>
                     ) : (
                       <BsCart
                         className="edit-btn cursor-pointer mx-auto"
-                        onClick={() => handleCart(row.id)}
+                        onClick={() => handleCart(row)}
                       />
                     )}
                   </td>
