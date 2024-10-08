@@ -28,8 +28,8 @@ const Table = ({ data, header, handleEdit, handleDelete, handleCart }) => {
         <h3 className="text-[#212B36] text-base font-semibold -tracking-[0.15px] whitespace-nowrap">
           {header}
         </h3>
-        <div className="flex items-center justify-between flex-wrap gap-1">
-          <div className="lg:max-w-sm  border focus-within:border-blue-600 rounded-lg border-[#E7E7E7] py-3 px-4 justify-between items-center max-h-10 hidden md:flex">
+        <div className="flex items-center justify-between flex-wrap gap-1 w-full md:w-auto">
+          <div className="w-full lg:max-w-sm  border focus-within:border-blue-600 rounded-lg border-[#E7E7E7] py-3 px-4 justify-between items-center max-h-10 flex">
             <input
               type="text"
               className="outline-none w-9/12"
@@ -79,7 +79,7 @@ const Table = ({ data, header, handleEdit, handleDelete, handleCart }) => {
             </tr>
           </thead>
           <tbody>
-            { filteredData?.map((row: any, idx: number) => {
+            {filteredData?.map((row: any, idx: number) => {
               return (
                 <tr key={idx} className="content-center">
                   <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark capitalize flex items-center gap-2">

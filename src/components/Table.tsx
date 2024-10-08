@@ -1,7 +1,7 @@
 import { BsFillTrashFill, BsFillPencilFill } from 'react-icons/bs';
 import BrandOne from '../images/brand/brand-01.svg';
 import { Link } from 'react-router-dom';
-import moment from 'moment'
+import moment from 'moment';
 const Table = ({ data, header, handleEdit, handleDelete, user }) => {
   return (
     <div className="rounded-sm border border-stroke bg-white px-5 pt-6 pb-2.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
