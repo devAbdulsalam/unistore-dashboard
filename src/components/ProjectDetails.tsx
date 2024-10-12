@@ -12,7 +12,7 @@ const ProjectDetails = ({ data }) => {
               className="size-[250px] md:w-full mx-auto"
             >
               <img
-                src={`https://ui-avatars.com/api/?name=${data?.name}`}
+                src={data?.image?.url}
                 alt="document"
                 className="h-60 w-72 md:w-full object-cover rounded-t-xl"
               />

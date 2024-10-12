@@ -8,14 +8,14 @@ const Card = ({ data }) => {
           <Suspense
             fallback={
               <img
-                src={`https://ui-avatars.com/api/?name=${data?.name}`}
+                src={data?.image?.url}
                 alt="product image"
                 className="object-contain rounded-t-xl"
               />
             }
           >
             <img
-              src={`${data?.image}`}
+              src={`${data?.image?.url}`}
               alt="product image"
               className=" object-contain rounded-t-xl"
             />
@@ -24,7 +24,7 @@ const Card = ({ data }) => {
       </div>
 
       <div className="mt-4 flex items-end justify-between">
-        <p className="text-sm font-medium">{data?.category}</p>
+        <p className="text-sm font-medium">{data?.name}</p>
       </div>
     </div>
   );

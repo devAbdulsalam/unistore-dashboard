@@ -70,6 +70,9 @@ const Table = ({ data, header, handleEdit, handleDelete, handleCart }) => {
               <th className="min-w-[150px] py-4 px-4 font-medium text-black dark:text-white">
                 Quantity
               </th>
+              <th className="min-w-[150px] py-4 px-4 font-medium text-black dark:text-white">
+                Description
+              </th>
               <th className="py-4 px-4 font-medium text-black dark:text-white">
                 Status
               </th>
@@ -85,7 +88,7 @@ const Table = ({ data, header, handleEdit, handleDelete, handleCart }) => {
                   <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark capitalize flex items-center gap-2">
                     <div className="flex-shrink-0">
                       <img
-                        src={row?.image || BrandOne}
+                        src={row?.image.url || BrandOne}
                         alt="Brand"
                         className="w-[60px] h-[60px] rounded-full"
                       />
@@ -107,9 +110,9 @@ const Table = ({ data, header, handleEdit, handleDelete, handleCart }) => {
                       </p>
                     )}
                   </td>
-                  {/* <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
-                    &#8358; {row.price}
-                  </td> */}
+                  <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
+                    {row.description}
+                  </td>
                   <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
                     <span>{row.status || 'Approved'}</span>
                   </td>

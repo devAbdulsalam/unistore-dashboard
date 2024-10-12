@@ -14,6 +14,7 @@ const apiUrl = import.meta.env.VITE_API_URL;
 import axios from 'axios';
 import DeleteToolTip from '../components/DeleteToolTip';
 import EditTooltip from '../components/EditTooltip';
+import moment from 'moment';
 
 const Order = () => {
   const { user } = useContext(AuthContext);
@@ -167,7 +168,7 @@ const Order = () => {
 
   return (
     <>
-      <Breadcrumb pageName="Order" />
+      <Breadcrumb pageName="Request" />
       <div className="flex justify-between my-2 bg-white rounded p-2 px-2">
         <h2 className="text-title-md font-bold text-black dark:text-white">
           Name: {data?.product?.name}
@@ -180,30 +181,32 @@ const Order = () => {
         )}
       </div>
 
-      <div>
-        <h3 className="font-semibold mb-2">Order info:</h3>
+      <div id="receipt" className="p-4">
+        <h3 className="font-semibold mb-2">Request info:</h3>
         <div>
-          <p>Order Quantity: {data?.quantity}</p>
-          <p>User name: {data?.userName}</p>
-          <h3 className="font-semibold my-2">Product info:</h3>
+          <p>Quantity: {data?.quantity}</p>
+          <p>User name: {data?.name}</p>
+          <p>Date: {moment(data?.createdAt).format('Do MMM YYY')}</p>
+          <p>User name: {data?.name}</p>
+          <p>
+            Request status:{' '}
+            <span
+              className={`${
+                data?.status === 'pending' ? 'text-yellow-500' : 'text-primary'
+              } capitalize`}
+            >
+              {data?.status}
+            </span>
+          </p>
+          <h3 className="font-semibold mt-4 mb-2">Product info:</h3>
           <Link to={`/products/${data?.product_id}`}>
             Product Name: {data?.product?.name}
+            <p>Product Quantity: {data?.product?.quantity}</p>
           </Link>
-          <p>Product Description: {data?.product?.description}</p>
-          <p>Product Quantity: {data?.product?.quantity}</p>
-          <p>Price: {data?.product?.price}</p>
-          {user?.user?.role === 'ADMIN' && (
-            <>
-              <h3 className="font-semibold my-2">user info:</h3>
-              <Link to={`/users/${data?.user_id}`}>
-                Name: {data?.user?.username}
-              </Link>
-              <p>User role: {data?.user?.role}</p>
-              <p>Email: {data?.user?.email}</p>
-              <p>Address: {data?.user?.phone}</p>
-            </>
-          )}
+          <p>Department: {data?.product?.description}</p>
         </div>
+      </div>
+      <div>
         <button
           onClick={handlePrint}
           className="flex w-full justify-center rounded bg-primary p-3 mt-3 font-medium text-gray"

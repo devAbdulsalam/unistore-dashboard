@@ -8,7 +8,7 @@ export const fetchDashboard = async (user) => {
         Authorization: `Bearer ${user?.token || user?.accessToken}`,
       },
     };
-    const { data } = await axios.get(`${apiUrl}/users/user/dashboard`, config);
+    const { data } = await axios.get(`${apiUrl}/users/dashboard`, config);
     return data;
   } catch (error) {
     console.log(error.message);

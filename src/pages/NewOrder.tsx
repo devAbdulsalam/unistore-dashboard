@@ -102,8 +102,9 @@ const AddProduct = () => {
         if (res.data) {
           toast.success('Products added successfully');
         }
+        console.log('requests', res.data)
         queryClient.invalidateQueries({ queryKey: ['orders'] });
-        navigate('/orders');
+        navigate('/requests');
       })
       .catch((error) => {
         console.error(error);

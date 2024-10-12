@@ -79,12 +79,12 @@ const Orders = () => {
   };
   return (
     <>
-      <Breadcrumb pageName="Orders" />
+      <Breadcrumb pageName="Requests" />
       <div className="flex flex-col gap-10">
         <Table
           data={data || []}
           user={user}
-          header="Orders"
+          header="Requests"
           handleDelete={handleDelete}
           handleEdit={handleEdit}
         />

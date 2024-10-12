@@ -44,14 +44,14 @@ const Table = ({ data, header, handleEdit, handleDelete, user }) => {
               return (
                 <tr key={idx} className="content-center">
                   <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark capitalize flex items-center gap-2">
-                    <Link to={`/orders/${row?.id}`} className="flex-shrink-0">
+                    <Link to={`/requests/${row?._id}`} className="flex-shrink-0">
                       <img
                         src={row?.product?.image || BrandOne}
                         alt="Brand"
                         className="w-[60px] h-[60px] rounded-full"
                       />
                     </Link>
-                    <Link to={`/orders/${row?.id}`}>
+                    <Link to={`/requests/${row?._id}`}>
                       {row?.product_id?.name}
                     </Link>
                   </td>
@@ -59,7 +59,7 @@ const Table = ({ data, header, handleEdit, handleDelete, user }) => {
                     <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
                       <Link
                         to={`/users`}
-                        className={`label label-${row?.user_id}`}
+                        className={`label label-${row?.user_id} capitalize`}
                       >
                         {row?.user_id == user?.user?.id ? row?.name : 'Admin'}
                       </Link>
@@ -76,7 +76,7 @@ const Table = ({ data, header, handleEdit, handleDelete, user }) => {
                       ? moment(row?.createdAt).format('MMM Do')
                       : ''}
                   </td>
-                  <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
+                  <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark capitalize">
                     <span>{row.status || 'Approved'}</span>
                   </td>
                   {user?.user?.role === 'ADMIN' && (

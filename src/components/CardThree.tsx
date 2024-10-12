@@ -25,7 +25,7 @@ const CardThree = (data: any) => {
           <h4 className="text-title-md font-bold text-black dark:text-white">
             {data?.data || '0'}
           </h4>
-          <span className="text-sm font-medium">Reviews</span>
+          <span className="text-sm font-medium">Requests</span>
         </div>
 
         <span className="flex items-center gap-1 text-sm font-medium text-meta-3">

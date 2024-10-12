@@ -14,6 +14,9 @@ import DeleteToolTip from '../components/DeleteToolTip';
 import EditTooltip from '../components/EditTooltip';
 import toast from 'react-hot-toast';
 import { BsCart } from 'react-icons/bs';
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
+import moment from 'moment';
 
 const Business = () => {
   const { user } = useContext(AuthContext);
@@ -138,6 +141,38 @@ const Business = () => {
       }
     });
   };
+  const downloadPDF = (name: any) => {
+    const table = document.getElementById(name);
+
+    html2canvas(table).then((canvas) => {
+      const imgData = canvas.toDataURL('image/png');
+      const pdf = new jsPDF('p', 'pt', 'a4');
+      // const imgWidth = 300;
+      // const pageHeight = 290;
+      const pageWidth = pdf.internal.pageSize.getWidth();
+      const pageHeight = pdf.internal.pageSize.getHeight();
+      const imgWidth = pageWidth;
+      const imgHeight = (canvas.height * imgWidth) / canvas.width;
+      let heightLeft = imgHeight;
+      let position = 0;
+
+      pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+      heightLeft -= pageHeight;
+
+      while (heightLeft >= 0) {
+        position = heightLeft - imgHeight;
+        pdf.addPage();
+        pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+        heightLeft -= pageHeight;
+      }
+
+      pdf.save(`${name}-${id}.pdf`);
+    });
+  };
+
+  const handlePrint = async () => {
+    await downloadPDF('receipt');
+  };
 
   return (
     <>
@@ -160,24 +195,27 @@ const Business = () => {
           </div>
         )}
       </div>
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-4 2xl:gap-7.5">
-        <Card data={data} />
+      <div id="receipt" className="p-4">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-4 2xl:gap-7.5">
+          <Card data={data} />
+        </div>
         <div>
-          <div>
-            <h3 className="font-semibold">Price:</h3>
-          </div>
-          <div>
-            <p>{data?.price}</p>
+          <h3 className="font-semibold mb-2 mt-4">Product info:</h3>
+          <div className="space-y-2">
+            <p>
+              Deliverd By: <span className="capitalize">{data?.category}</span>
+            </p>
+            <p>Department: {data?.description}</p>
+            <p>Quantity: {data?.quantity}</p>
+            <p>Date: {moment(data?.createdAt).format('Do MMM YYYY')}</p>
           </div>
         </div>
-      </div>
-      <div>
-        <h3 className="font-semibold mb-2">Product info:</h3>
-        <div>
-          <p>Description: {data?.description}</p>
-          <p>Quantity: {data?.quantity}</p>
-          <p>Date: {data?.createdAt}</p>
-        </div>
+        <button
+          onClick={handlePrint}
+          className="flex w-full justify-center rounded bg-primary p-3 mt-3 font-medium text-gray"
+        >
+          Print
+        </button>
       </div>
       {isLoading || loading ? <Loader /> : ''}
     </>

@@ -56,7 +56,7 @@ const AddModal = ({ show, setShow, setLoading, loading, account }) => {
           }
           setBalance(0);
           setRemark('');
-          navigate('/orders');
+          navigate('/requests');
         })
         .catch((error) => {
           //   const message = getError(error);
@@ -79,7 +79,7 @@ const AddModal = ({ show, setShow, setLoading, loading, account }) => {
           <div className="flex justify-between">
             <div>
               <h2 className="font-semibold text-lg text-blue-500">
-                New Order for {account?.name}
+                New Request for {account?.name}
               </h2>
             </div>
             <button
@@ -131,7 +131,7 @@ const AddModal = ({ show, setShow, setLoading, loading, account }) => {
             className="bg-primary  hover:bg-primary/50 text-white font-semibold h-10 py-1 w-full flex items-center justify-center rounded-md transition-all duration-500 ease-in-out"
             onClick={handleSubmit}
           >
-            <span>Order</span>
+            <span>Request</span>
           </button>
         </div>
       </div>

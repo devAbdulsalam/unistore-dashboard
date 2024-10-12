@@ -75,13 +75,13 @@ const coreRoutes = [
     component: Category,
   },
   {
-    path: '/orders',
-    title: 'orders',
+    path: '/requests',
+    title: 'requests',
     component: Listings,
   },
   {
-    path: '/orders/:id',
-    title: 'orders',
+    path: '/requests/:id',
+    title: 'requests',
     component: Listing,
   },
   {
