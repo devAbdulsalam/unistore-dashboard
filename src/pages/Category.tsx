@@ -45,10 +45,10 @@ const Category = () => {
   };
   const handleSubmit = async () => {
     if (!name.trim()) {
-      return toast.error('title is required!');
+      return toast.error('Name is required!');
     }
     const data: FormData = {
-      name,
+      category: name,
       status,
     };
     setLoading(true);
@@ -86,7 +86,7 @@ const Category = () => {
       if (result.isConfirmed) {
         setLoading(true);
         axios
-          .delete(`${apiUrl}/categories/${id}`, config)
+          .delete(`${apiUrl}/products/categories/${id}`, config)
           .then((res) => {
             if (res.data) {
               // console.log(res.data);

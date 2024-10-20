@@ -27,21 +27,21 @@ const Table = ({ data, header, handleEdit, handleDelete }) => {
                 return (
                   <tr key={idx} className="content-center">
                     <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark capitalize flex items-center gap-2">
-                      <Link to={row?._id}>{row?.name}</Link>
+                      <Link to={row?._id}>{row?.category}</Link>
                     </td>
                     <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
-                      <span>{row.status || 'Approved'}</span>
+                      <span>{row.status || 'Active'}</span>
                     </td>
                     <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
                       <span className="actions flex grid-cols-2 gap-4">
                         <BsFillTrashFill
                           className="delete-btn cursor-pointer"
-                          onClick={() => handleDelete(row.id)}
+                          onClick={() => handleDelete(row._id)}
                         />
 
                         <BsFillPencilFill
                           className="edit-btn cursor-pointer"
-                          onClick={() => handleEdit(row.id)}
+                          onClick={() => handleEdit(row._id)}
                         />
                       </span>
                     </td>
