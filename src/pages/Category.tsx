@@ -53,7 +53,7 @@ const Category = () => {
     };
     setLoading(true);
     axios
-      .post(`${apiUrl}/categories`, data, config)
+      .post(`${apiUrl}/products/categories`, data, config)
       .then((res) => {
         if (res.data) {
           toast.success('New Category added successfully');
